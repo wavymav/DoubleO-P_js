@@ -1,7 +1,6 @@
 var dice = {
-	sides: 6,
-	roll: function(side) {
-				randomNumber =Math.floor(Math.random() * dice.sides) + 1;
+	roll: function(sides) {
+				randomNumber =Math.floor(Math.random() * sides) + 1;
 				console.log(randomNumber);
 	}
 };
