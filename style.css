@@ -8,7 +8,7 @@
 	border-radius: 10px;
 	background-color: #fff;
   width: 310px;
-  height: 460px;
+  height: 530px;
 	margin: auto;
   margin-bottom: 5px;
   padding: 0 5px;
@@ -41,5 +41,21 @@
     font-size: 39px;
     background: -webkit-gradient(linear, left top, left bottom, from(#90EE90), to(#98FB98));
     background: -moz-linear-gradient(top, #90EE90, #98FB98);
+    border-radius: 25px;
+}
+
+#numbers a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: 43px;
+    float: left;
+    padding: 10px;
+    margin: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #111;
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFFAFA), to(#FFFADD));
+    background: -moz-linear-gradient(top, #FFFAFA, #FFFADD);
     border-radius: 25px;
 }
