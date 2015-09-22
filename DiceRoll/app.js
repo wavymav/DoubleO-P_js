@@ -17,11 +17,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	// Dice takes one param which would be the number of sides of each new instance of the object created
 	function Dice(sides) {
 		this.sides = sides;
-		this.roll = function() {
-			randomNumber = Math.floor(Math.random() * this.sides) + 1;
-			return randomNumber;
-		};
 	}
+
+	// Romoved the roll method from the Dice constructor
+	// This increases performance and is good practice for JS OOP
+	// Every Dice object will have access to this roll method using the .prototype
+	Dice.prototype.roll = function() {
+		randomNumber = Math.floor(Math.random() * this.sides) + 1;
+		return randomNumber;
+	};
 
 	// Created a new Dice object with (6) sides that is given to the var dice
 	var dice = new Dice(6);
