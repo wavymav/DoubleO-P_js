@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
+	/*
 	// Declaring a dice {} literal
 	var dice = {
 		// sides property with the value of 6
@@ -10,6 +11,22 @@ document.addEventListener('DOMContentLoaded', function(){
 					return randomNumber;
 				}
 	};
+	*/
+
+	// This is a dice constructor function
+	// Dice takes one param which would be the number of sides of each new instance of the object created
+	function Dice(sides) {
+		this.sides = sides;
+		this.roll = function() {
+			randomNumber = Math.floor(Math.random() * this.sides) + 1;
+			return randomNumber;
+		};
+	}
+
+	// Created a new Dice object with (6) sides that is given to the var dice
+	var dice = new Dice(6);
+
+	console.log(dice.roll());
 
 	// The outputNumber() expression takes one param will be the value of dice.roll()
 	// Grabs the #output element and sets the innerHTML val to dice.roll()
