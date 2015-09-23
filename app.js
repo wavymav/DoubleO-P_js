@@ -114,4 +114,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Calls the summerPlaylist constructor method renderElement() on playlistElement
 	summerPlaylist.renderElement(playlistElement);
 
+	// Grabing the buttons by id
+	var play = document.getElementById('play');
+	var stop = document.getElementById('stop');
+	var forward = document.getElementById('forward');
+
+
 });
