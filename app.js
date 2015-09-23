@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // Creating a new instance of the Playlist constructor
 var summerPlaylist = new Playlist();
 
+// Creating new Song intances
 var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
 		gumbe = new Song('Gumbo', 'Jay Rock', '4:30'),
 		nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
+
+// Using the the .add() constructor method to push the new created songs to the songs []
+summerPlaylist.add(trashMan);
+summerPlaylist.add(gumbo);
+summerPlaylist.add(nightcrawler);
