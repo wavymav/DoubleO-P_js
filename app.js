@@ -1,14 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 	// Variable Declorations
 
-	// Creating a new instance of the Playlist constructor
-	var summerPlaylist = new Playlist();
-
-	// Creating new Song intances
-	var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
-			gumbo = new Song('Gumbo', 'Jay Rock', '4:30'),
-			nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
-
 	// Grabs the <tbody> element by the id of 'playlist' and stores it in playlistElement
 	var playlistElement = document.getElementById('playlist');
 
@@ -19,26 +11,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	//  ===========================================================
 
-
-	// Song constructor properties
-	function Song(title, artist, duration, isPlaying) {
-	 this.title = title;
-	 this.artist = artist;
-	 this.duration = duration;
-	 this.isPlaying = false;
+	// Media constructor properties
+	function Media(title, duration) {
+		this.title = title;
+	 	this.duration = duration;
+	 	this.isPlaying = false;
 	}
 
-	// Song Methods
+	// Media constructor Methods
 
 	// Changes the boolean value of the Song current object to true
-	Song.prototype.play = function() {
+	Media.prototype.play = function() {
 		this.isPlaying = true;
 	};
 
 	// Changes the boolean value of the Song current object to false
-	Song.prototype.stop = function() {
+	Media.prototype.stop = function() {
 		this.isPlaying = false;
 	};
+
+	//  ===========================================================
+
+
+	// Song constructor properties
+	function Song(title, artist, duration) {
+		// Using the .call property on the Media constructor to chain to it's cronstructors
+		Media.call(this, title, duration);
+		// this.title = title;
+		// 	this.duration = duration;
+		// 	this.isPlaying = false;
+		this.artist = artist;
+	}
+
+	// Song constructor Methods
+
+	// Setting up the prototype chain
+	// Setting the Song.prototype to all of Media.prototype(s)
+	Song.prototype = Object.create(Media.prototype);
 
 	// Stores the property values of each Song cronstructor instance in songTemplate
 	Song.prototype.toHTML = function() {
@@ -59,13 +68,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	//  ===========================================================
 
+
+	// Song constructor properties
+	function Movie(title, year, duration) {
+		// Using the .call property on the Media constructor to chain to it's cronstructors
+		Media.call(this, title, duration);
+		this.year = year;
+	}
+
+	// Song constructor Methods
+
+	// Setting up the prototype chain
+	// Setting the Song.prototype to all of Media.prototype(s)
+	Movie.prototype = Object.create(Media.prototype);
+
+	// Stores the property values of each Song cronstructor instance in songTemplate
+	Movie.prototype.toHTML = function() {
+		var songTemplate = '<tr';
+
+		if (this.isPlaying) {
+				songTemplate += ' class="success"';
+		}
+
+		songTemplate +=	'>' +
+									'<td>' + this.title + '</td>' +
+									'<td> (' + this.year + ') </td>' +
+									'<td>' + this.duration + '</td>' +
+								'</tr>';
+
+		return songTemplate;
+	};
+
+	//  ===========================================================
+
 	// Playlist constructor properties
 	function Playlist() {
 		this.songs = [];
 		this.nowPlaying = 0;
 	}
 
-	// Playlist Methods
+	// Playlist constructor Methods
 
 	// Adds a Song object to the end of the Playlist songs []
 	Playlist.prototype.add = function(song) {
@@ -115,11 +157,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// ============================================================
 	// Creating instances
+	// Creating a new instance of the Playlist constructor
+	var summerPlaylist = new Playlist();
+
+	// Creating new Song intances
+	var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
+			gumbo = new Song('Gumbo', 'Jay Rock', '4:30'),
+			nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
+
+	// Creating a new Movie intance
+	var inception = new Movie('Inception', '2010', '2h 35m');
 
 	// Using the the .add() constructor method to push the new created songs to the songs []
 	summerPlaylist.add(trashMan);
 	summerPlaylist.add(gumbo);
 	summerPlaylist.add(nightcrawler);
+
+	// Adding the movie to the summerPlaylist
+	summerPlaylist.add(inception);
 
 	// Calls the summerPlaylist constructor method renderElement() on playlistElement
 	summerPlaylist.renderElement(playlistElement);
