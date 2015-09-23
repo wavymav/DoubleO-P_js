@@ -19,8 +19,21 @@ document.addEventListener('DOMContentLoaded', function() {
 		this.isPlaying = false;
 	};
 
+	// Stores the property values of each Song cronstructor instance in songTemplate
 	Song.prototype.toHTML = function() {
+		var songTemplate = '<tr';
 
+		if (this.isPlaying) {
+				songTemplate += 'class="success"';
+		}
+
+		songTemplate +=	'>' +
+									'<td>' + this.title + '</td>' +
+									'<td>' + this.artist + '</td>' +
+									'<td>' + this.duration + '</td>' +
+								'</tr>';
+
+		return songTemplate;
 	};
 
 	//  ===========================================================
@@ -66,23 +79,39 @@ document.addEventListener('DOMContentLoaded', function() {
 		this.play();
 	};
 
-	Playlist.prototype.renderElement = function() {
+	// The renderElement constructor method takes an element as a param
+	Playlist.prototype.renderElement = function(playlistData) {
+		// sets the innerHTML of the element to an empty string
+		playlistData.innerHTML = "";
 
+		// iterates over the length of the songs[]
+		// calling the .toHTML() constructor method on each songs item
+		for (var i = 0; i < this.songs.length; i++) {
+			playlistData.innerHTML += this.songs[i].toHTML();
+		}
 	};
+
+
+	// ============================================================
+	// Creating instances
+
+	// Creating a new instance of the Playlist constructor
+	var summerPlaylist = new Playlist();
+
+	// Creating new Song intances
+	var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
+			gumbo = new Song('Gumbo', 'Jay Rock', '4:30'),
+			nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
+
+	// Using the the .add() constructor method to push the new created songs to the songs []
+	summerPlaylist.add(trashMan);
+	summerPlaylist.add(gumbo);
+	summerPlaylist.add(nightcrawler);
+
+	// Grabs the <tbody> element by the id of 'playlist' and stores it in playlistElement
+	var playlistElement = document.getElementById('playlist');
+
+	// Calls the summerPlaylist constructor method renderElement() on playlistElement
+	summerPlaylist.renderElement(playlistElement);
+
 });
-
-// ============================================================
-// Creating instances
-
-// Creating a new instance of the Playlist constructor
-var summerPlaylist = new Playlist();
-
-// Creating new Song intances
-var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
-		gumbe = new Song('Gumbo', 'Jay Rock', '4:30'),
-		nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
-
-// Using the the .add() constructor method to push the new created songs to the songs []
-summerPlaylist.add(trashMan);
-summerPlaylist.add(gumbo);
-summerPlaylist.add(nightcrawler);
