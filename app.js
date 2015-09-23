@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+	// Variable Declorations
+
+	// Creating a new instance of the Playlist constructor
+	var summerPlaylist = new Playlist();
+
+	// Creating new Song intances
+	var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
+			gumbo = new Song('Gumbo', 'Jay Rock', '4:30'),
+			nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
+
+	// Grabs the <tbody> element by the id of 'playlist' and stores it in playlistElement
+	var playlistElement = document.getElementById('playlist');
+
+	// Grabing the buttons by id
+	var playButton = document.getElementById('play'),
+			stopButton = document.getElementById('stop'),
+			forwardButton = document.getElementById('forward');
+
+	//  ===========================================================
+
+
 	// Song constructor properties
 	function Song(title, artist, duration, isPlaying) {
 	 this.title = title;
@@ -95,47 +116,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	// ============================================================
 	// Creating instances
 
-	// Creating a new instance of the Playlist constructor
-	var summerPlaylist = new Playlist();
-
-	// Creating new Song intances
-	var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
-			gumbo = new Song('Gumbo', 'Jay Rock', '4:30'),
-			nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
-
 	// Using the the .add() constructor method to push the new created songs to the songs []
 	summerPlaylist.add(trashMan);
 	summerPlaylist.add(gumbo);
 	summerPlaylist.add(nightcrawler);
 
-	// Grabs the <tbody> element by the id of 'playlist' and stores it in playlistElement
-	var playlistElement = document.getElementById('playlist');
-
 	// Calls the summerPlaylist constructor method renderElement() on playlistElement
 	summerPlaylist.renderElement(playlistElement);
-
-	// Grabing the buttons by id
-	var playButton = document.getElementById('play'),
-			stopButton = document.getElementById('stop'),
-			forwardButton = document.getElementById('forward');
-
 
 	// Button Event listeners
 	playButton.addEventListener('click', function() {
 		summerPlaylist.play();
+		// Re-renders playlist
 		summerPlaylist.renderElement(playlistElement);
 	});
 
 	stopButton.addEventListener('click', function() {
 		summerPlaylist.stop();
+		// Re-renders playlist
 		summerPlaylist.renderElement(playlistElement);
 	});
 
 	forwardButton.addEventListener('click', function() {
 		summerPlaylist.next();
+		// Re-renders playlist
 		summerPlaylist.renderElement(playlistElement);
 	});
-
-
 
 });
