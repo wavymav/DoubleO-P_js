@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var songTemplate = '<tr';
 
 		if (this.isPlaying) {
-				songTemplate += 'class="success"';
+				songTemplate += ' class="success"';
 		}
 
 		songTemplate +=	'>' +
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// After the play method will be invoked
 	Playlist.prototype.next = function() {
 		this.stop();
-		this.currentSong++;
+		this.nowPlaying++;
 		if (this.nowPlaying === this.songs.length) {
 			this.nowPlaying = 0;
 		}
@@ -115,9 +115,27 @@ document.addEventListener('DOMContentLoaded', function() {
 	summerPlaylist.renderElement(playlistElement);
 
 	// Grabing the buttons by id
-	var play = document.getElementById('play');
-	var stop = document.getElementById('stop');
-	var forward = document.getElementById('forward');
+	var playButton = document.getElementById('play'),
+			stopButton = document.getElementById('stop'),
+			forwardButton = document.getElementById('forward');
+
+
+	// Button Event listeners
+	playButton.addEventListener('click', function() {
+		summerPlaylist.play();
+		summerPlaylist.renderElement(playlistElement);
+	});
+
+	stopButton.addEventListener('click', function() {
+		summerPlaylist.stop();
+		summerPlaylist.renderElement(playlistElement);
+	});
+
+	forwardButton.addEventListener('click', function() {
+		summerPlaylist.next();
+		summerPlaylist.renderElement(playlistElement);
+	});
+
 
 
 });
