@@ -70,3 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	};
 });
+
+// ============================================================
+// Creating instances
+
+// Creating a new instance of the Playlist constructor
+var summerPlaylist = new Playlist();
+
+var	trashMan = new Song('Trash Man', 'Jimi Hendrix', '8:15'),
+		gumbe = new Song('Gumbo', 'Jay Rock', '4:30'),
+		nightcrawler = new Song('Nightcrawler', 'Travis $cott', '3:13');
