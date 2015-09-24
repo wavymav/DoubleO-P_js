@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Grabing the buttons by id
 	var playButton = document.getElementById('play'),
 			stopButton = document.getElementById('stop'),
-			forwardButton = document.getElementById('forward');
+			forwardButton = document.getElementById('forward'),
+			backwardButton = document.getElementById('backward');
 
 	//  ===========================================================
 
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// The next method will call the stop method on the stored Song object
 	// Then increment by 1 up the []
-	// IF the nowPlaying [] is equal to the number of songs
+	// IF the nowPlaying number value is equal to the number of songs in the array
 	// THEN nowPlaying will be reset to 0
 	// After the play method will be invoked
 	Playlist.prototype.next = function() {
@@ -138,6 +139,21 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 		this.play();
 	};
+
+	// The back method will call the stop method on the stored Song object
+	// Then decrement by 1 down the []
+	// IF the nowPlaying number value is less than 0
+	// THEN nowPlaying will be reset to number the last item index position in the []
+	// After the play method will be invoked
+	Playlist.prototype.back = function() {
+		this.stop();
+		this.nowPlaying--;
+		if (this.nowPlaying < 0) {
+			this.nowPlaying = this.songs.length - 1;
+		}
+		this.play();
+	};
+
 
 	// The renderElement constructor method takes an element as a param
 	Playlist.prototype.renderElement = function(playlistData) {
@@ -191,6 +207,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	forwardButton.addEventListener('click', function() {
 		summerPlaylist.next();
+		// Re-renders playlist
+		summerPlaylist.renderElement(playlistElement);
+	});
+
+	backwardButton.addEventListener('click', function() {
+		summerPlaylist.back();
 		// Re-renders playlist
 		summerPlaylist.renderElement(playlistElement);
 	});
