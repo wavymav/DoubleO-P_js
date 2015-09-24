@@ -37,9 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	function Song(title, artist, duration) {
 		// Using the .call property on the Media constructor to chain to it's cronstructors
 		Media.call(this, title, duration);
-		// this.title = title;
-		// 	this.duration = duration;
-		// 	this.isPlaying = false;
 		this.artist = artist;
 	}
 
